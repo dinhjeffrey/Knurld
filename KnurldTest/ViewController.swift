@@ -11,7 +11,8 @@ import Alamofire
 
 class ViewController: UIViewController {
     var json = JSON([])
-
+    var accessToken = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let params = [
@@ -25,8 +26,12 @@ class ViewController: UIViewController {
         
         let url = "https://api.knurld.io/oauth/client_credential/accesstoken?grant_type=client_credentials"
         Alamofire.request(.POST, url, parameters: params, headers: headers)
-            .responseJSON { response in
-                debugPrint(response)
+            .responseJSON { responseRequest, responseResponse, responseResult in
+                print(responseRequest)
+                print(responseResponse)
+                print(responseResult)
+
+
         }
         
      
