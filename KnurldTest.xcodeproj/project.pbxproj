@@ -1,0 +1,373 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		810285A11D1B6806008E4557 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810285A01D1B6806008E4557 /* AppDelegate.swift */; };
+		810285A31D1B6806008E4557 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810285A21D1B6806008E4557 /* ViewController.swift */; };
+		810285A61D1B6806008E4557 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 810285A41D1B6806008E4557 /* Main.storyboard */; };
+		810285A81D1B6806008E4557 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 810285A71D1B6806008E4557 /* Assets.xcassets */; };
+		810285AB1D1B6806008E4557 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 810285A91D1B6806008E4557 /* LaunchScreen.storyboard */; };
+		810285B31D1B6AC8008E4557 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810285B21D1B6AC8008E4557 /* SwiftyJSON.swift */; };
+		E6CC7B941DA76A03A0218253 /* Pods_KnurldTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63765F82DE8BFC745F9A8E69 /* Pods_KnurldTest.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		19B9F3F92AB375B5D4A8C7E9 /* Pods-KnurldTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KnurldTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-KnurldTest/Pods-KnurldTest.release.xcconfig"; sourceTree = "<group>"; };
+		63765F82DE8BFC745F9A8E69 /* Pods_KnurldTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KnurldTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8102859D1D1B6806008E4557 /* KnurldTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KnurldTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		810285A01D1B6806008E4557 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		810285A21D1B6806008E4557 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		810285A51D1B6806008E4557 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		810285A71D1B6806008E4557 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		810285AA1D1B6806008E4557 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		810285AC1D1B6806008E4557 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		810285B21D1B6AC8008E4557 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		DB392DCB756EC021655A7025 /* Pods-KnurldTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KnurldTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KnurldTest/Pods-KnurldTest.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8102859A1D1B6806008E4557 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6CC7B941DA76A03A0218253 /* Pods_KnurldTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		810285941D1B6806008E4557 = {
+			isa = PBXGroup;
+			children = (
+				8102859F1D1B6806008E4557 /* KnurldTest */,
+				8102859E1D1B6806008E4557 /* Products */,
+				C2FBFCBC6BE4C03AA937D25A /* Pods */,
+				C873DFF19764D4BB2F81690A /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		8102859E1D1B6806008E4557 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8102859D1D1B6806008E4557 /* KnurldTest.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8102859F1D1B6806008E4557 /* KnurldTest */ = {
+			isa = PBXGroup;
+			children = (
+				810285B21D1B6AC8008E4557 /* SwiftyJSON.swift */,
+				810285A01D1B6806008E4557 /* AppDelegate.swift */,
+				810285A21D1B6806008E4557 /* ViewController.swift */,
+				810285A41D1B6806008E4557 /* Main.storyboard */,
+				810285A71D1B6806008E4557 /* Assets.xcassets */,
+				810285A91D1B6806008E4557 /* LaunchScreen.storyboard */,
+				810285AC1D1B6806008E4557 /* Info.plist */,
+			);
+			path = KnurldTest;
+			sourceTree = "<group>";
+		};
+		C2FBFCBC6BE4C03AA937D25A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DB392DCB756EC021655A7025 /* Pods-KnurldTest.debug.xcconfig */,
+				19B9F3F92AB375B5D4A8C7E9 /* Pods-KnurldTest.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C873DFF19764D4BB2F81690A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				63765F82DE8BFC745F9A8E69 /* Pods_KnurldTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8102859C1D1B6806008E4557 /* KnurldTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 810285AF1D1B6806008E4557 /* Build configuration list for PBXNativeTarget "KnurldTest" */;
+			buildPhases = (
+				6F5AD2A1FDFEAA57C69E28C2 /* [CP] Check Pods Manifest.lock */,
+				810285991D1B6806008E4557 /* Sources */,
+				8102859A1D1B6806008E4557 /* Frameworks */,
+				8102859B1D1B6806008E4557 /* Resources */,
+				068919BBE3A0472743543D74 /* [CP] Embed Pods Frameworks */,
+				B9F8D8C3CABB13582FBEB648 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KnurldTest;
+			productName = KnurldTest;
+			productReference = 8102859D1D1B6806008E4557 /* KnurldTest.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		810285951D1B6806008E4557 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Sara Du";
+				TargetAttributes = {
+					8102859C1D1B6806008E4557 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+				};
+			};
+			buildConfigurationList = 810285981D1B6806008E4557 /* Build configuration list for PBXProject "KnurldTest" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 810285941D1B6806008E4557;
+			productRefGroup = 8102859E1D1B6806008E4557 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8102859C1D1B6806008E4557 /* KnurldTest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8102859B1D1B6806008E4557 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				810285AB1D1B6806008E4557 /* LaunchScreen.storyboard in Resources */,
+				810285A81D1B6806008E4557 /* Assets.xcassets in Resources */,
+				810285A61D1B6806008E4557 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		068919BBE3A0472743543D74 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KnurldTest/Pods-KnurldTest-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6F5AD2A1FDFEAA57C69E28C2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B9F8D8C3CABB13582FBEB648 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KnurldTest/Pods-KnurldTest-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		810285991D1B6806008E4557 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				810285B31D1B6AC8008E4557 /* SwiftyJSON.swift in Sources */,
+				810285A31D1B6806008E4557 /* ViewController.swift in Sources */,
+				810285A11D1B6806008E4557 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		810285A41D1B6806008E4557 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				810285A51D1B6806008E4557 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		810285A91D1B6806008E4557 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				810285AA1D1B6806008E4557 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		810285AD1D1B6806008E4557 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		810285AE1D1B6806008E4557 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		810285B01D1B6806008E4557 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DB392DCB756EC021655A7025 /* Pods-KnurldTest.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = KnurldTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Duing.KnurldTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		810285B11D1B6806008E4557 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 19B9F3F92AB375B5D4A8C7E9 /* Pods-KnurldTest.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = KnurldTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Duing.KnurldTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		810285981D1B6806008E4557 /* Build configuration list for PBXProject "KnurldTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				810285AD1D1B6806008E4557 /* Debug */,
+				810285AE1D1B6806008E4557 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		810285AF1D1B6806008E4557 /* Build configuration list for PBXNativeTarget "KnurldTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				810285B01D1B6806008E4557 /* Debug */,
+				810285B11D1B6806008E4557 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 810285951D1B6806008E4557 /* Project object */;
+}
