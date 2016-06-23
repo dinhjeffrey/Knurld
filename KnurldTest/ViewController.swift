@@ -24,20 +24,12 @@ class ViewController: UIViewController {
         ]
         
         let url = "https://api.knurld.io/oauth/client_credential/accesstoken?grant_type=client_credentials"
-        Alamofire.request(.POST, "https://httpbin.org/get", headers: headers)
+        Alamofire.request(.POST, url, parameters: params, headers: headers)
             .responseJSON { response in
                 debugPrint(response)
         }
         
-        Alamofire.request(.GET, url, parameters: params, encoding: ParameterEncoding.URL).responseJSON { (_, _, result) in
-            switch result {
-            case .Success(let data):
-                self.json = JSON(data)
-                self.tableview.reloadData()
-            case .Failure(_, let error):
-                print("Request failed with error: \(error)")
-            }
-        }
+     
     }
 
     override func didReceiveMemoryWarning() {
