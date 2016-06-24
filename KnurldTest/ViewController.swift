@@ -27,15 +27,11 @@ class ViewController: UIViewController {
         let url = "https://api.knurld.io/oauth/client_credential/accesstoken?grant_type=client_credentials"
         Alamofire.request(.POST, url, parameters: params, headers: headers)
             .responseJSON { response in
-                print(response.request)
-                print(response.response)
-                print(response.data)
-                print(response.result)
-
-
+                if let accessToken = response.result.value?["access_token"] {
+                    self.accessToken = accessToken as! String
+                    print(self.accessToken)
+                }
         }
-        
-     
     }
 
     override func didReceiveMemoryWarning() {
