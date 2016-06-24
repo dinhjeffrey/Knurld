@@ -34,7 +34,7 @@ class ViewController: UIViewController {
         }
     }
 
-    func createUser(name: String, gender: String, password: String){
+    func createConsumer(name: String, gender: String, password: String){
         let url = "https://api.knurld.io/v1/consumers"
         let params = [
             "username": name,
