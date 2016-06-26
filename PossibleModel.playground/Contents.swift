@@ -1,5 +1,5 @@
 //: Playground - noun: a place where people can play
-// possible model structure?
+// possible design pattern?
 import UIKit
 import XCPlayground
 
