@@ -3,14 +3,11 @@
 import UIKit
 import XCPlayground
 
-struct AppModelRequet {
+struct AppModel {
     var repeats: Int
     var vocabulary: [String] = []
     var verificationLength: Int
-}
-
-struct AppModel {
-    var url: NSURL
+    var url: NSURL?
 }
 
 enum Gender: CustomStringConvertible {
@@ -55,3 +52,4 @@ struct Analysis {
     var audioUrl: NSURL
     var filedata: NSFileManager
 }
+
