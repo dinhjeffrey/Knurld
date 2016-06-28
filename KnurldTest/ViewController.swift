@@ -27,10 +27,8 @@ class ViewController: UIViewController {
         let url = "https://api.knurld.io/oauth/client_credential/accesstoken?grant_type=client_credentials"
         Alamofire.request(.POST, url, parameters: params, headers: headers)
             .responseJSON { response in
-                print(response.request)
-                print(response.response)
-                print(response.data)
-                print(response.result)
+               
+                
 
 
         }
