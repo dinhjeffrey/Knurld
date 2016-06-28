@@ -28,7 +28,7 @@ class ViewController: UIViewController {
         ]
         
         let headers = [
-             "Content-Type" : "application/x-www-form-urlencoded"
+            "Content-Type" : "application/x-www-form-urlencoded"
         ]
         
         let url = "https://api.knurld.io/oauth/client_credential/accesstoken?grant_type=client_credentials"
@@ -66,7 +66,7 @@ class ViewController: UIViewController {
                 }
         }
     }
-
+    
     func createConsumer(name: String, gender: String, password: String){
         let url = "https://api.knurld.io/v1/consumers"
         let params = [
@@ -84,7 +84,7 @@ class ViewController: UIViewController {
         var request = NSMutableURLRequest(URL: NSURL(fileURLWithPath: url))
         let encoding = Alamofire.ParameterEncoding.URL
         (request, _) = encoding.encode(request, parameters: params)
-
+        
         Alamofire.request(.POST, url, parameters: params, headers: headers, encoding: .JSON)
             .responseJSON { response in
                 if let consumerID = response.result.value?["href"] as? String {
@@ -151,10 +151,11 @@ class ViewController: UIViewController {
             "Developer-Id" : developerID
         ]
         
-        var request = NSMutableURLRequest(URL: NSURL(fileURLWithPath: url))
-        let encoding = Alamofire.ParameterEncoding.URL
-        (request, _) = encoding.encode(request, parameters: params)
-        
+        if url != "" {
+            var request = NSMutableURLRequest(URL: NSURL(fileURLWithPath: url))
+            let encoding = Alamofire.ParameterEncoding.URL
+            (request, _) = encoding.encode(request, parameters: params)
+        }
         Alamofire.request(.POST, url, parameters: params, headers: headers, encoding: .JSON)
             .responseJSON { response in
                 print(response)
@@ -187,12 +188,49 @@ class ViewController: UIViewController {
                 }
         }
     }
-
+    
+    func verifyVoiceprint(audioLink: url,
+                          phrase: [Interval.phrase], start: [Interval.start], stop: [Interval.stop] ) {
+        let url = verificationID
+        var intervalsDictionary = [AnyObject]()
+        _ = {
+            for (index, _) in phrase.enumerate() {
+                var intervals = [String: AnyObject]()
+                intervals["phrase"] = phrase[index]
+                intervals["start"] = start[index]
+                intervals["stop"] = stop[index]
+                intervalsDictionary.append(intervals)
+            }
+        }()
+        
+        let params : [String: AnyObject] = [
+            "verification.wav": audioLink,
+            "intervals": intervalsDictionary
+        ]
+        
+        let headers = [
+            "Content-Type": "application/json",
+            "Authorization":  accessToken,
+            "Developer-Id" : developerID
+        ]
+        
+        if url != "" {
+            var request = NSMutableURLRequest(URL: NSURL(fileURLWithPath: url))
+            let encoding = Alamofire.ParameterEncoding.URL
+            (request, _) = encoding.encode(request, parameters: params)
+        }
+        
+        Alamofire.request(.POST, url, parameters: params, headers: headers, encoding: .JSON)
+            .responseJSON { response in
+                print(response)
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    
 }
 
