@@ -265,6 +265,29 @@ class ViewController: UIViewController {
         }
     }
     
+    func analysisByUrl(audioUrl: url, numWords: String) {
+        let url = "https://api.knurld.io/v1/endpointAnalysis/url"
+        let params = [
+            "audioUrl": audioUrl,
+            "words": numWords
+        ]
+        
+        let headers = [
+            "Content-Type": "application/json",
+            "Authorization": accessToken,
+            "Developer-Id" : developerID
+        ]
+        
+        var request = NSMutableURLRequest(URL: NSURL(fileURLWithPath: url))
+        let encoding = Alamofire.ParameterEncoding.URL
+        (request, _) = encoding.encode(request, parameters: params)
+        
+        Alamofire.request(.POST, url, parameters: params, headers: headers, encoding: .JSON)
+            .responseJSON { response in
+                print(response)
+        }
+    }
+
     
     
     
