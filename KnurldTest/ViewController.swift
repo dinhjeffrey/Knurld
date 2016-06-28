@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     var json = JSON([])
     var developerID = "Bearer: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MDQ4MTY5MDUsInJvbGUiOiJhZG1pbiIsImlkIjoiZWNkMTAwM2YzODJlNWEzZjU0NGQyZjFkY2Y3YmNmYjUiLCJ0ZW5hbnQiOiJ0ZW5hbnRfbXJwdGF4M2xuenl4cXpsem5qeHhhenR2bzQyaHU2dHBudnpkZTVsYnBpenc0M2xnb3YzeHMzZHVtcnhkazUzciIsIm5hbWUiOiJhZG1pbiJ9.El88CANBe5C_KLpYlP7dc-5-dwF-zPFGk2YeubNobm59uM2Sx9NbVGcN5n7smm4izo1s0RsrVKHBd9mH4hkPQA"
     var accessToken = String()
+    var appModelID = String()
     var consumerID = String()
     var enrollmentID = String()
     
@@ -34,6 +35,32 @@ class ViewController: UIViewController {
                 if let accessToken = response.result.value?["access_token"] {
                     self.accessToken = "Bearer " + (accessToken as! String)
                     print(accessToken)
+                }
+        }
+    }
+    func createAppModel(enrollmentRepeats: Int, vocabulary: [String], verificationLength: Int) {
+        let url = "https://api.knurld.io/v1/app-models"
+        let params = [
+            "enrollmentRepeats": enrollmentRepeats,
+            "vocabulary": vocabulary,
+            "verificationLength": verificationLength
+        ]
+        let headers = [
+            "Content-Type": "application/json",
+            "Authorization": accessToken,
+            "Developer-Id" : developerID
+        ]
+        
+        var request = NSMutableURLRequest(URL: NSURL(fileURLWithPath: url))
+        let encoding = Alamofire.ParameterEncoding.URL
+        (request, _) = encoding.encode(request, parameters: params as? [String : AnyObject])
+        
+        Alamofire.request(.POST, url, parameters: params as? [String : AnyObject], headers: headers, encoding: .JSON)
+            .responseJSON { response in
+                print(response)
+                if let appModelID = response.result.value?["href"] {
+                    self.appModelID = appModelID as! String
+                    print(appModelID)
                 }
         }
     }
