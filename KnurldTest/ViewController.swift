@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     var enrollmentID = url()
     var verificationID = url()
     var callID = url()
+    var taskNameID = url()
     
     
     override func viewDidLoad() {
@@ -284,7 +285,10 @@ class ViewController: UIViewController {
         
         Alamofire.request(.POST, url, parameters: params, headers: headers, encoding: .JSON)
             .responseJSON { response in
-                print(response)
+                if let taskNameID = response.result.value?["taskName"] as? String {
+                    self.taskNameID = taskNameID
+                    print(taskNameID)
+                }
         }
     }
 
