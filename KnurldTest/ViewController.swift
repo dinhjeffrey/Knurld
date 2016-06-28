@@ -34,12 +34,8 @@ class ViewController: UIViewController {
         let url = "https://api.knurld.io/oauth/client_credential/accesstoken?grant_type=client_credentials"
         Alamofire.request(.POST, url, parameters: params, headers: headers)
             .responseJSON { response in
-<<<<<<< HEAD
-               
-                
-=======
-                if let accessToken = response.result.value?["access_token"] {
-                    self.accessToken = "Bearer " + (accessToken as! String)
+                if let accessToken = response.result.value?["access_token"] as? String {
+                    self.accessToken = "Bearer " + accessToken
                     print(accessToken)
                 }
         }
@@ -64,13 +60,12 @@ class ViewController: UIViewController {
         Alamofire.request(.POST, url, parameters: params as? [String : AnyObject], headers: headers, encoding: .JSON)
             .responseJSON { response in
                 print(response)
-                if let appModelID = response.result.value?["href"] {
-                    self.appModelID = appModelID as! String
+                if let appModelID = response.result.value?["href"] as? String {
+                    self.appModelID = appModelID
                     print(appModelID)
                 }
         }
     }
->>>>>>> origin/master
 
     func createConsumer(name: String, gender: String, password: String){
         let url = "https://api.knurld.io/v1/consumers"
@@ -92,8 +87,8 @@ class ViewController: UIViewController {
 
         Alamofire.request(.POST, url, parameters: params, headers: headers, encoding: .JSON)
             .responseJSON { response in
-                if let consumerID = response.result.value?["href"] {
-                    self.consumerID = consumerID as! String
+                if let consumerID = response.result.value?["href"] as? String {
+                    self.consumerID = consumerID
                     print(consumerID)
                 }
         }
@@ -119,8 +114,8 @@ class ViewController: UIViewController {
         
         Alamofire.request(.POST, url, parameters: params, headers: headers, encoding: .JSON)
             .responseJSON { response in
-                if let enrollmentID = response.result.value?["href"] {
-                    self.enrollmentID = enrollmentID as! String
+                if let enrollmentID = response.result.value?["href"] as? String {
+                    self.enrollmentID = enrollmentID
                 }
         }
     }
@@ -186,8 +181,8 @@ class ViewController: UIViewController {
         
         Alamofire.request(.POST, url, parameters: params, headers: headers, encoding: .JSON)
             .responseJSON { response in
-                if let verificationID = response.result.value?["href"] {
-                    self.verificationID = verificationID as! String
+                if let verificationID = response.result.value?["href"] as? String {
+                    self.verificationID = verificationID
                     print(verificationID)
                 }
         }
