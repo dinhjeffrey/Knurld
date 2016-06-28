@@ -20,6 +20,7 @@ class ViewController: UIViewController {
     var verificationID = url()
     var callID = url()
     var taskNameID = url()
+    var intervalsJson = [AnyObject]()
     
     
     override func viewDidLoad() {
@@ -288,6 +289,23 @@ class ViewController: UIViewController {
                 if let taskNameID = response.result.value?["taskName"] as? String {
                     self.taskNameID = taskNameID
                     print(taskNameID)
+                }
+        }
+    }
+    
+    func getAnalysis() {
+        let url = "https://api.knurld.io/v1/endpointAnalysis/" + taskNameID
+        guard taskNameID != "" else { print("didn't initiate analysis yet"); return }
+        let headers = [
+            "Authorization": accessToken,
+            "Developer-Id" : developerID
+        ]
+        
+        Alamofire.request(.GET, url, headers: headers)
+            .responseJSON { response in
+                if let intervalsJson = response.result.value?["intervals"] as? [AnyObject] {
+                    self.intervalsJson = intervalsJson
+                    print(intervalsJson)
                 }
         }
     }
