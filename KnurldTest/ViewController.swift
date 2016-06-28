@@ -130,6 +130,7 @@ class ViewController: UIViewController {
     func populateEnrollment(audioLink: url,
                             phrase: [Interval.phrase], start: [Interval.start], stop: [Interval.stop] ) {
         let url = enrollmentID
+        guard url != "" else { print("didn't initiate enrollment yet"); return }
         var intervalsDictionary = [AnyObject]()
         _ = {
             for (index, _) in phrase.enumerate() {
@@ -152,11 +153,10 @@ class ViewController: UIViewController {
             "Developer-Id" : developerID
         ]
         
-        if url != "" {
-            var request = NSMutableURLRequest(URL: NSURL(fileURLWithPath: url))
-            let encoding = Alamofire.ParameterEncoding.URL
-            (request, _) = encoding.encode(request, parameters: params)
-        }
+        var request = NSMutableURLRequest(URL: NSURL(fileURLWithPath: url))
+        let encoding = Alamofire.ParameterEncoding.URL
+        (request, _) = encoding.encode(request, parameters: params)
+        
         Alamofire.request(.POST, url, parameters: params, headers: headers, encoding: .JSON)
             .responseJSON { response in
                 print(response)
@@ -193,6 +193,7 @@ class ViewController: UIViewController {
     func verifyVoiceprint(audioLink: url,
                           phrase: [Interval.phrase], start: [Interval.start], stop: [Interval.stop] ) {
         let url = verificationID
+        guard url != "" else { print("didn't initiate verification yet"); return }
         var intervalsDictionary = [AnyObject]()
         for (index, _) in phrase.enumerate() {
             var intervals = [String: AnyObject]()
@@ -213,11 +214,10 @@ class ViewController: UIViewController {
             "Developer-Id" : developerID
         ]
         
-        if url != "" {
-            var request = NSMutableURLRequest(URL: NSURL(fileURLWithPath: url))
-            let encoding = Alamofire.ParameterEncoding.URL
-            (request, _) = encoding.encode(request, parameters: params)
-        }
+        var request = NSMutableURLRequest(URL: NSURL(fileURLWithPath: url))
+        let encoding = Alamofire.ParameterEncoding.URL
+        (request, _) = encoding.encode(request, parameters: params)
+        
         
         Alamofire.request(.POST, url, parameters: params, headers: headers, encoding: .JSON)
             .responseJSON { response in
@@ -264,8 +264,8 @@ class ViewController: UIViewController {
                 print(response)
         }
     }
-
-
+    
+    
     
     
     override func didReceiveMemoryWarning() {
