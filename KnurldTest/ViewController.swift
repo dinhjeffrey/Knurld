@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     var consumerID = url()
     var enrollmentID = url()
     var verificationID = url()
+    var callID = url()
     
     
     override func viewDidLoad() {
@@ -193,15 +194,13 @@ class ViewController: UIViewController {
                           phrase: [Interval.phrase], start: [Interval.start], stop: [Interval.stop] ) {
         let url = verificationID
         var intervalsDictionary = [AnyObject]()
-        _ = {
-            for (index, _) in phrase.enumerate() {
-                var intervals = [String: AnyObject]()
-                intervals["phrase"] = phrase[index]
-                intervals["start"] = start[index]
-                intervals["stop"] = stop[index]
-                intervalsDictionary.append(intervals)
-            }
-        }()
+        for (index, _) in phrase.enumerate() {
+            var intervals = [String: AnyObject]()
+            intervals["phrase"] = phrase[index]
+            intervals["start"] = start[index]
+            intervals["stop"] = stop[index]
+            intervalsDictionary.append(intervals)
+        }
         
         let params : [String: AnyObject] = [
             "verification.wav": audioLink,
@@ -225,6 +224,32 @@ class ViewController: UIViewController {
                 print(response)
         }
     }
+    
+    func initiateCall(phoneNumber: String) {
+        let url = "https://api.knurld.io/v1/calls"
+        let params = [
+            "number": phoneNumber
+        ]
+        
+        let headers = [
+            "Content-Type": "application/json",
+            "Authorization": accessToken,
+            "Developer-Id" : developerID
+        ]
+        
+        var request = NSMutableURLRequest(URL: NSURL(fileURLWithPath: url))
+        let encoding = Alamofire.ParameterEncoding.URL
+        (request, _) = encoding.encode(request, parameters: params)
+        
+        Alamofire.request(.POST, url, parameters: params, headers: headers, encoding: .JSON)
+            .responseJSON { response in
+                if let callID = response.result.value?["href"] as? String {
+                    self.callID = callID
+                    print(callID)
+                }
+        }
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
