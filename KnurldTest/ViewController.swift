@@ -12,8 +12,8 @@ import Alamofire
 class ViewController: UIViewController {
     typealias url = String
     var json = JSON([])
-    var developerID = "Bearer: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MDQ4MTY5MDUsInJvbGUiOiJhZG1pbiIsImlkIjoiZWNkMTAwM2YzODJlNWEzZjU0NGQyZjFkY2Y3YmNmYjUiLCJ0ZW5hbnQiOiJ0ZW5hbnRfbXJwdGF4M2xuenl4cXpsem5qeHhhenR2bzQyaHU2dHBudnpkZTVsYnBpenc0M2xnb3YzeHMzZHVtcnhkazUzciIsIm5hbWUiOiJhZG1pbiJ9.El88CANBe5C_KLpYlP7dc-5-dwF-zPFGk2YeubNobm59uM2Sx9NbVGcN5n7smm4izo1s0RsrVKHBd9mH4hkPQA"
-    var accessToken = String()
+    static var developerID = "Bearer: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MDQ4MTY5MDUsInJvbGUiOiJhZG1pbiIsImlkIjoiZWNkMTAwM2YzODJlNWEzZjU0NGQyZjFkY2Y3YmNmYjUiLCJ0ZW5hbnQiOiJ0ZW5hbnRfbXJwdGF4M2xuenl4cXpsem5qeHhhenR2bzQyaHU2dHBudnpkZTVsYnBpenc0M2xnb3YzeHMzZHVtcnhkazUzciIsIm5hbWUiOiJhZG1pbiJ9.El88CANBe5C_KLpYlP7dc-5-dwF-zPFGk2YeubNobm59uM2Sx9NbVGcN5n7smm4izo1s0RsrVKHBd9mH4hkPQA"
+    static var accessToken = String()
     var appModelID = url()
     var consumerID = url()
     var enrollmentID = url()
@@ -21,6 +21,18 @@ class ViewController: UIViewController {
     var callID = url()
     var taskNameID = url()
     var intervalsJson = [AnyObject]()
+    
+    func encodeJson(url: String, params: [String: AnyObject]) -> [String: AnyObject] {
+        var request = NSMutableURLRequest(URL: NSURL(fileURLWithPath: url))
+        let encoding = Alamofire.ParameterEncoding.URL
+        (request, _) = encoding.encode(request, parameters: params)
+        return params
+    }
+    lazy var headers = [
+        "Content-Type": "application/json",
+        "Authorization": accessToken,
+        "Developer-Id" : developerID
+    ]
     
     
     override func viewDidLoad() {
@@ -38,29 +50,23 @@ class ViewController: UIViewController {
         Alamofire.request(.POST, url, parameters: params, headers: headers)
             .responseJSON { response in
                 if let accessToken = response.result.value?["access_token"] as? String {
-                    self.accessToken = "Bearer " + accessToken
+                    ViewController.accessToken = "Bearer " + accessToken
                     print(accessToken)
                 }
         }
     }
+    
     func createAppModel(enrollmentRepeats: Int, vocabulary: [String], verificationLength: Int) {
         let url = "https://api.knurld.io/v1/app-models"
-        let params = [
+        let params: [String: AnyObject] = [
             "enrollmentRepeats": enrollmentRepeats,
             "vocabulary": vocabulary,
             "verificationLength": verificationLength
         ]
-        let headers = [
-            "Content-Type": "application/json",
-            "Authorization": accessToken,
-            "Developer-Id" : developerID
-        ]
         
-        var request = NSMutableURLRequest(URL: NSURL(fileURLWithPath: url))
-        let encoding = Alamofire.ParameterEncoding.URL
-        (request, _) = encoding.encode(request, parameters: params as? [String : AnyObject])
+        let encodedParams = encodeJson(url, params: params)
         
-        Alamofire.request(.POST, url, parameters: params as? [String : AnyObject], headers: headers, encoding: .JSON)
+        Alamofire.request(.POST, url, parameters: encodedParams, headers: headers, encoding: .JSON)
             .responseJSON { response in
                 print(response)
                 if let appModelID = response.result.value?["href"] as? String {
@@ -78,17 +84,9 @@ class ViewController: UIViewController {
             "password": password
         ]
         
-        let headers = [
-            "Content-Type": "application/json",
-            "Authorization": accessToken,
-            "Developer-Id" : developerID
-        ]
+        let encodedParams = encodeJson(url, params: params)
         
-        var request = NSMutableURLRequest(URL: NSURL(fileURLWithPath: url))
-        let encoding = Alamofire.ParameterEncoding.URL
-        (request, _) = encoding.encode(request, parameters: params)
-        
-        Alamofire.request(.POST, url, parameters: params, headers: headers, encoding: .JSON)
+        Alamofire.request(.POST, url, parameters: encodedParams, headers: headers, encoding: .JSON)
             .responseJSON { response in
                 if let consumerID = response.result.value?["href"] as? String {
                     self.consumerID = consumerID
@@ -104,18 +102,10 @@ class ViewController: UIViewController {
             "application": application
         ]
         
-        let headers = [
-            "Content-Type": "application/json",
-            "Authorization": accessToken,
-            "Developer-Id" : developerID
-        ]
-        
-        var request = NSMutableURLRequest(URL: NSURL(fileURLWithPath: url))
-        let encoding = Alamofire.ParameterEncoding.URL
-        (request, _) = encoding.encode(request, parameters: params)
+        let encodedParams = encodeJson(url, params: params)
         
         
-        Alamofire.request(.POST, url, parameters: params, headers: headers, encoding: .JSON)
+        Alamofire.request(.POST, url, parameters: encodedParams, headers: headers, encoding: .JSON)
             .responseJSON { response in
                 if let enrollmentID = response.result.value?["href"] as? String {
                     self.enrollmentID = enrollmentID
@@ -134,32 +124,23 @@ class ViewController: UIViewController {
         let url = enrollmentID
         guard url != "" else { print("didn't initiate enrollment yet"); return }
         var intervalsDictionary = [AnyObject]()
-        _ = {
-            for (index, _) in phrase.enumerate() {
-                var intervals = [String: AnyObject]()
-                intervals["phrase"] = phrase[index]
-                intervals["start"] = start[index]
-                intervals["stop"] = stop[index]
-                intervalsDictionary.append(intervals)
-            }
-        }()
+        
+        for (index, _) in phrase.enumerate() {
+            var intervals = [String: AnyObject]()
+            intervals["phrase"] = phrase[index]
+            intervals["start"] = start[index]
+            intervals["stop"] = stop[index]
+            intervalsDictionary.append(intervals)
+        }
         
         let params : [String: AnyObject] = [
             "enrollment.wav": audioLink,
             "intervals": intervalsDictionary
         ]
         
-        let headers = [
-            "Content-Type": "application/json",
-            "Authorization":  accessToken,
-            "Developer-Id" : developerID
-        ]
+        let encodedParams = encodeJson(url, params: params)
         
-        var request = NSMutableURLRequest(URL: NSURL(fileURLWithPath: url))
-        let encoding = Alamofire.ParameterEncoding.URL
-        (request, _) = encoding.encode(request, parameters: params)
-        
-        Alamofire.request(.POST, url, parameters: params, headers: headers, encoding: .JSON)
+        Alamofire.request(.POST, url, parameters: encodedParams, headers: headers, encoding: .JSON)
             .responseJSON { response in
                 print(response)
         }
@@ -172,18 +153,9 @@ class ViewController: UIViewController {
             "application": application
         ]
         
-        let headers = [
-            "Content-Type": "application/json",
-            "Authorization": accessToken,
-            "Developer-Id" : developerID
-        ]
+        let encodedParams = encodeJson(url, params: params)
         
-        var request = NSMutableURLRequest(URL: NSURL(fileURLWithPath: url))
-        let encoding = Alamofire.ParameterEncoding.URL
-        (request, _) = encoding.encode(request, parameters: params)
-        
-        
-        Alamofire.request(.POST, url, parameters: params, headers: headers, encoding: .JSON)
+        Alamofire.request(.POST, url, parameters: encodedParams, headers: headers, encoding: .JSON)
             .responseJSON { response in
                 if let verificationID = response.result.value?["href"] as? String {
                     self.verificationID = verificationID
@@ -210,18 +182,9 @@ class ViewController: UIViewController {
             "intervals": intervalsDictionary
         ]
         
-        let headers = [
-            "Content-Type": "application/json",
-            "Authorization":  accessToken,
-            "Developer-Id" : developerID
-        ]
+        let encodedParams = encodeJson(url, params: params)
         
-        var request = NSMutableURLRequest(URL: NSURL(fileURLWithPath: url))
-        let encoding = Alamofire.ParameterEncoding.URL
-        (request, _) = encoding.encode(request, parameters: params)
-        
-        
-        Alamofire.request(.POST, url, parameters: params, headers: headers, encoding: .JSON)
+        Alamofire.request(.POST, url, parameters: encodedParams, headers: headers, encoding: .JSON)
             .responseJSON { response in
                 print(response)
         }
@@ -233,17 +196,9 @@ class ViewController: UIViewController {
             "number": phoneNumber
         ]
         
-        let headers = [
-            "Content-Type": "application/json",
-            "Authorization": accessToken,
-            "Developer-Id" : developerID
-        ]
+        let encodedParams = encodeJson(url, params: params)
         
-        var request = NSMutableURLRequest(URL: NSURL(fileURLWithPath: url))
-        let encoding = Alamofire.ParameterEncoding.URL
-        (request, _) = encoding.encode(request, parameters: params)
-        
-        Alamofire.request(.POST, url, parameters: params, headers: headers, encoding: .JSON)
+        Alamofire.request(.POST, url, parameters: encodedParams, headers: headers, encoding: .JSON)
             .responseJSON { response in
                 if let callID = response.result.value?["href"] as? String {
                     self.callID = callID
@@ -255,11 +210,6 @@ class ViewController: UIViewController {
     func terminateCall() {
         let url = callID
         guard url != "" else { print("didn't initiate call yet"); return }
-        let headers = [
-            "Content-Type": "application/json",
-            "Authorization": accessToken,
-            "Developer-Id" : developerID
-        ]
         
         Alamofire.request(.POST, url, headers: headers)
             .responseJSON { response in
@@ -274,17 +224,9 @@ class ViewController: UIViewController {
             "words": numWords
         ]
         
-        let headers = [
-            "Content-Type": "application/json",
-            "Authorization": accessToken,
-            "Developer-Id" : developerID
-        ]
+        let encodedParams = encodeJson(url, params: params)
         
-        var request = NSMutableURLRequest(URL: NSURL(fileURLWithPath: url))
-        let encoding = Alamofire.ParameterEncoding.URL
-        (request, _) = encoding.encode(request, parameters: params)
-        
-        Alamofire.request(.POST, url, parameters: params, headers: headers, encoding: .JSON)
+        Alamofire.request(.POST, url, parameters: encodedParams, headers: headers, encoding: .JSON)
             .responseJSON { response in
                 if let taskNameID = response.result.value?["taskName"] as? String {
                     self.taskNameID = taskNameID
@@ -297,8 +239,8 @@ class ViewController: UIViewController {
         let url = "https://api.knurld.io/v1/endpointAnalysis/" + taskNameID
         guard taskNameID != "" else { print("didn't initiate analysis yet"); return }
         let headers = [
-            "Authorization": accessToken,
-            "Developer-Id" : developerID
+            "Authorization": ViewController.accessToken,
+            "Developer-Id" : ViewController.developerID
         ]
         
         Alamofire.request(.GET, url, headers: headers)
@@ -309,7 +251,7 @@ class ViewController: UIViewController {
                 }
         }
     }
-
+    
     
     
     
