@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     var json = JSON([])
     var developerID = "Bearer: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MDQ4MTY5MDUsInJvbGUiOiJhZG1pbiIsImlkIjoiZWNkMTAwM2YzODJlNWEzZjU0NGQyZjFkY2Y3YmNmYjUiLCJ0ZW5hbnQiOiJ0ZW5hbnRfbXJwdGF4M2xuenl4cXpsem5qeHhhenR2bzQyaHU2dHBudnpkZTVsYnBpenc0M2xnb3YzeHMzZHVtcnhkazUzciIsIm5hbWUiOiJhZG1pbiJ9.El88CANBe5C_KLpYlP7dc-5-dwF-zPFGk2YeubNobm59uM2Sx9NbVGcN5n7smm4izo1s0RsrVKHBd9mH4hkPQA"
     var accessToken = String()
+    var consumerID = String()
     var enrollmentID = String()
     
     
@@ -32,6 +33,7 @@ class ViewController: UIViewController {
             .responseJSON { response in
                 if let accessToken = response.result.value?["access_token"] {
                     self.accessToken = "Bearer " + (accessToken as! String)
+                    print(accessToken)
                 }
         }
     }
@@ -56,7 +58,10 @@ class ViewController: UIViewController {
 
         Alamofire.request(.POST, url, parameters: params, headers: headers, encoding: .JSON)
             .responseJSON { response in
-                
+                if let consumerID = response.result.value?["href"] {
+                    self.consumerID = consumerID as! String
+                    print(consumerID)
+                }
         }
     }
     
