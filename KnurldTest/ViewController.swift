@@ -250,6 +250,23 @@ class ViewController: UIViewController {
         }
     }
     
+    func terminateCall() {
+        let url = callID
+        guard url != "" else { print("didn't initiate call yet"); return }
+        let headers = [
+            "Content-Type": "application/json",
+            "Authorization": accessToken,
+            "Developer-Id" : developerID
+        ]
+        
+        Alamofire.request(.POST, url, headers: headers)
+            .responseJSON { response in
+                print(response)
+        }
+    }
+
+
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
