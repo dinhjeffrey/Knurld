@@ -11,8 +11,10 @@ import Alamofire
 
 class ViewController: UIViewController {
     var json = JSON([])
-    var accessToken = ""
-    var enrollmentID = ""
+    var developerID = "Bearer: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MDQ4MTY5MDUsInJvbGUiOiJhZG1pbiIsImlkIjoiZWNkMTAwM2YzODJlNWEzZjU0NGQyZjFkY2Y3YmNmYjUiLCJ0ZW5hbnQiOiJ0ZW5hbnRfbXJwdGF4M2xuenl4cXpsem5qeHhhenR2bzQyaHU2dHBudnpkZTVsYnBpenc0M2xnb3YzeHMzZHVtcnhkazUzciIsIm5hbWUiOiJhZG1pbiJ9.El88CANBe5C_KLpYlP7dc-5-dwF-zPFGk2YeubNobm59uM2Sx9NbVGcN5n7smm4izo1s0RsrVKHBd9mH4hkPQA"
+    var accessToken = String()
+    var enrollmentID = String()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +31,7 @@ class ViewController: UIViewController {
         Alamofire.request(.POST, url, parameters: params, headers: headers)
             .responseJSON { response in
                 if let accessToken = response.result.value?["access_token"] {
-                    self.accessToken = accessToken as! String
+                    self.accessToken = "Bearer " + (accessToken as! String)
                 }
         }
     }
@@ -44,8 +46,8 @@ class ViewController: UIViewController {
         
         let headers = [
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + accessToken,
-            "Developer-Id" : "Bearer: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MDQ4MTY5MDUsInJvbGUiOiJhZG1pbiIsImlkIjoiZWNkMTAwM2YzODJlNWEzZjU0NGQyZjFkY2Y3YmNmYjUiLCJ0ZW5hbnQiOiJ0ZW5hbnRfbXJwdGF4M2xuenl4cXpsem5qeHhhenR2bzQyaHU2dHBudnpkZTVsYnBpenc0M2xnb3YzeHMzZHVtcnhkazUzciIsIm5hbWUiOiJhZG1pbiJ9.El88CANBe5C_KLpYlP7dc-5-dwF-zPFGk2YeubNobm59uM2Sx9NbVGcN5n7smm4izo1s0RsrVKHBd9mH4hkPQA"
+            "Authorization": accessToken,
+            "Developer-Id" : developerID
         ]
         
         var request = NSMutableURLRequest(URL: NSURL(fileURLWithPath: url))
@@ -67,8 +69,8 @@ class ViewController: UIViewController {
         
         let headers = [
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + accessToken,
-            "Developer-Id" : "Bearer: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MDQ4MTY5MDUsInJvbGUiOiJhZG1pbiIsImlkIjoiZWNkMTAwM2YzODJlNWEzZjU0NGQyZjFkY2Y3YmNmYjUiLCJ0ZW5hbnQiOiJ0ZW5hbnRfbXJwdGF4M2xuenl4cXpsem5qeHhhenR2bzQyaHU2dHBudnpkZTVsYnBpenc0M2xnb3YzeHMzZHVtcnhkazUzciIsIm5hbWUiOiJhZG1pbiJ9.El88CANBe5C_KLpYlP7dc-5-dwF-zPFGk2YeubNobm59uM2Sx9NbVGcN5n7smm4izo1s0RsrVKHBd9mH4hkPQA"
+            "Authorization": accessToken,
+            "Developer-Id" : developerID
         ]
         
         var request = NSMutableURLRequest(URL: NSURL(fileURLWithPath: url))
@@ -85,31 +87,34 @@ class ViewController: UIViewController {
     }
     typealias TimePosition = Int
     struct Interval {
-        var phrase: String
-        var start: TimePosition
-        var stop: TimePosition
+        typealias phrase = String
+        typealias start = TimePosition
+        typealias stop = TimePosition
     }
     
-    func populateEnrollment(audioLink: NSURL,
-                            intervals: [Interval] ) {
+    func populateEnrollment(audioLink: String,
+                            phrase: [Interval.phrase], start: [Interval.start], stop: [Interval.stop] ) {
         let url = enrollmentID
-        let intervalsDictionary = [
-            [
-                "phrase": intervals[0],
-                "start": intervals[1],
-                "stop": intervals[2],
-            ]
-        ]
+        var intervalsDictionary = [AnyObject]()
+        _ = {
+            for (index, _) in phrase.enumerate() {
+                var intervals = [String: AnyObject]()
+                intervals["phrase"] = phrase[index]
+                intervals["start"] = start[index]
+                intervals["stop"] = stop[index]
+                intervalsDictionary.append(intervals)
+            }
+        }()
         
         let params : [String: AnyObject] = [
             "enrollment.wav": audioLink,
-            "intervals": (intervalsDictionary as? AnyObject)!
+            "intervals": intervalsDictionary
         ]
         
         let headers = [
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + accessToken,
-            "Developer-Id" : "Bearer: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MDQ4MTY5MDUsInJvbGUiOiJhZG1pbiIsImlkIjoiZWNkMTAwM2YzODJlNWEzZjU0NGQyZjFkY2Y3YmNmYjUiLCJ0ZW5hbnQiOiJ0ZW5hbnRfbXJwdGF4M2xuenl4cXpsem5qeHhhenR2bzQyaHU2dHBudnpkZTVsYnBpenc0M2xnb3YzeHMzZHVtcnhkazUzciIsIm5hbWUiOiJhZG1pbiJ9.El88CANBe5C_KLpYlP7dc-5-dwF-zPFGk2YeubNobm59uM2Sx9NbVGcN5n7smm4izo1s0RsrVKHBd9mH4hkPQA"
+            "Authorization":  accessToken,
+            "Developer-Id" : developerID
         ]
         
         var request = NSMutableURLRequest(URL: NSURL(fileURLWithPath: url))
